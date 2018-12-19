@@ -35,6 +35,21 @@ const departmentsReducer = (state=departmentsDefaultState, action) => {
         departments: updateDepartments
       }
     }
+    case "CREATE_DEPARTMENT": {
+      return {...state, isFetching: true}
+    }
+    case "CREATE_DEPARTMENT_REJECTED": {
+      return {...state, isFetching: false, error: action.payload}
+    }
+    case "CREATE_DEPARTMENT_FULFILLED": {
+      console.log('CREATE_DEPARTMENT_FULFILLED');
+      console.log(action.payload); //check if new department received correctly!!
+      return {
+        ...state,
+        isFetching: false,
+        departments: [...state.departments, action.payload],
+      }
+    }
   }
   return state
 }

@@ -29,3 +29,20 @@ export const deleteDepartment = (id) => {
   }
 }
 
+// Create a department.
+export const createDepartment = (departmentData={}) => {
+  return function(dispatch) {
+    const {
+      name = '',
+    } = departmentData;
+    dispatch({type: "CREATE_DEPARTMENT"});
+    axios.post("/api/departments", departmentData)
+      .then((response) => {
+        dispatch({type: "CREATE_DEPARTMENT_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "CREATE_DEPARTMENT_REJECTED", payload: err})
+      })
+  }
+}
+

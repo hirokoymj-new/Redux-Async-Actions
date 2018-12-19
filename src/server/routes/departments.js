@@ -55,4 +55,25 @@ router.delete('/:id', (req, res)=>{
   });
 });
 
+
+/**
+ * Save new department data.
+ * HTTP Method: POST
+ * @example
+ * // URL:
+ * http://localhost:8080/api/departments
+ */
+router.post('/', (req, res)=>{
+  const {name} = req.body;
+  const department = new Department({
+    name
+  });
+
+  department.save(function(err){
+    if(err) return res.status(500).send(err);
+    if(!department) return res.status(404).send(err);
+    res.json(department);
+  })
+});
+
 module.exports = router; 
