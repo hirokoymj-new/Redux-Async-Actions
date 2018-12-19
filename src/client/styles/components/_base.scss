@@ -1,0 +1,68 @@
+$primary-color:#5e3e94; //#79589F
+$secondary-color:#9a75da;
+$third-color: #dadaea;
+
+body{
+  background: #fff;
+  font-size: 16px;
+}
+*:focus {
+  outline: none !important;
+}
+
+h1{
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 30px !important; 
+  text-align: center; 
+}
+a{
+  color: $primary-color;
+  &:hover{
+    text-decoration: underline;
+    color: $secondary-color;
+  }
+}
+/* Override default button style */
+.btn-default {
+  background-color: $primary-color;
+  border: $primary-color;
+  color: #fff;
+  &:hover,
+  &:focus,
+  &.focus
+  {
+    background-color:$secondary-color !important;
+    border: $primary-color !important;
+    color: #fff !important
+  }
+}
+/* Override default danger button style */
+.btn-danger {
+  &:hover{
+    background-color: #f27671;
+    border-color: #f27671;    
+  }
+}
+.centered{
+  text-align: center;
+}
+/* tablet (>= 768px)
+-------------------------------------------------- */
+@media (min-width: 768px) {
+  h1{
+    text-align: left; 
+  }
+}
+
+/* Desktop (>= 992px)
+-------------------------------------------------- */
+@media (min-width: 992px) {
+  h1{
+    font-size: 35px !important;
+  }
+}
+
+/* Desktop (>= 1200px)
+-------------------------------------------------- */
+@media (min-width: 1200px){}
