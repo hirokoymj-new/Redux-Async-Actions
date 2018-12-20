@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {fetchDepartments, deleteDepartment} from '../actions/departments';
+import { Link } from 'react-router-dom';
 
 class DepartmentListPage extends Component{
   constructor(props){
@@ -26,7 +27,10 @@ class DepartmentListPage extends Component{
                         this.props.history.push('/');
                       }}>
                     Delete
-                    </button>
+                    </button>  
+                    <button>
+                      <Link to={`/edit/${department._id}`}>Edit</Link>
+                    </button>                      
                 </li>
               )
             }

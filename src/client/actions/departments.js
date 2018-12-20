@@ -46,3 +46,24 @@ export const createDepartment = (departmentData={}) => {
   }
 }
 
+/**
+ * Edit a department. Calls RESTful API PUT request. 
+ * @param {string} id - departmente Id
+ * @param {object} updates - update data {name: 'IT'}
+ * @example
+ * store.dispatch(editDepartment(10, {name:'Sales'}))
+ * store.dispatch(editDepartment(10, {name:'Sales'})).then(()=>{console.log('Edit success!')})
+ */
+export const editDepartment = (id, updates) => {
+  return (dispatch) => {
+    dispatch({type: "EDIT_EMPLOYEE"});
+    return axios.put(`/api/departments/${id}`, updates)
+      .then((response) => {
+        dispatch({type: "EDIT_EMPLOYEE_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "EDIT_EMPLOYEE_REJECTED", payload: err})
+      })
+  }
+}
+

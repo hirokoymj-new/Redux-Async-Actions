@@ -50,6 +50,31 @@ const departmentsReducer = (state=departmentsDefaultState, action) => {
         departments: [...state.departments, action.payload],
       }
     }
+    case "EDIT_DEPARTMENT": {
+      return {...state, isFetching: true}
+    }
+    case "EDIT_DEPARTMENT_REJECTED": {
+      return {...state, isFetching: false, error: action.payload}
+    }
+    case "EDIT_DEPARTMENT_FULFILLED": {
+      const updatedDepartments = state.departments.map((department)=>{
+        if(department.id === action.updates.id){
+          return {
+            ...department,
+            ...action.updates
+          };
+        }else{
+          return department;
+        }
+      })
+//      console.log(updatedDepartments);
+      return {
+        ...state,
+        // Override rest of properties to update.
+        isFetching: false,
+        departments: updatedDepartments
+      }
+    }    
   }
   return state
 }

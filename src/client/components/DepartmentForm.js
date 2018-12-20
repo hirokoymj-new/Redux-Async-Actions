@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {createDepartment} from '../actions/departments';
 
-//export default class AddDepartmentPage extends Component{
-class AddDepartmentPage extends Component{
+export default class DepartmentForm extends Component{
   constructor(props){
     super(props);
     this.state = {
-      departmentName: ''
+      departmentName: this.props.department ? this.props.department.name : ''
     }
   }
   handleChange = (e)=>{
@@ -20,19 +18,25 @@ class AddDepartmentPage extends Component{
     const formData = {
       name: this.state.departmentName
     }
-    this.props.dispatch( createDepartment(formData));
+    console.log('formData', formData);
+    this.props.onSubmit(formData);
   }
+  onReset = () =>{
+    this.setState({
+      departmentName:''
+    })
+  }
+  
   render(){
     return(
       <div>
-        <h1>Add Department</h1>
         <form onSubmit={this.onSubmit}>
-          <label></label>
+          <label>Department Name:</label>
           <input type="text" name="departmentName" value={this.state.departmentName} onChange={this.handleChange} />
-          <button type="submit">Submit</button>
-        </form>
+          <button type="submit">{this.props.department ? "Edit" : "Add"}</button>
+        </form>        
       </div>
     )
   }
-}  
-export default connect()(AddDepartmentPage);
+}
+
