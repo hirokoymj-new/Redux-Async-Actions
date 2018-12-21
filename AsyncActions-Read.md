@@ -1,5 +1,5 @@
 # Redux Async Actions - Read
-- Async actions allows us to keep the RESTful API calls separated from React component. 
+- Async actions allows us to separate the RESTful API calls from React component. 
   
 ## Liv Demo
 https://async-actions.herokuapp.com/
@@ -25,8 +25,10 @@ export default () => {
 ```
 
 ### 2. Async Actions - returns a function!
-- In `fetchDepartment()`, a function returns instead action object.
-- URL for axios:  https://afternoon-thicket-91110.herokuapp.com/api/departments
+**POINT**
+- A function returns instead of an action object.
+- I'll make use of Axios to send a GET request to the endpoint at https://afternoon-thicket-91110.herokuapp.com/api/departments
+
 ```js
 import axios from "axios";
 
