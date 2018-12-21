@@ -1,6 +1,10 @@
 import axios from "axios";
 
-// Read departments.
+/**
+ * Get all department data. Calls HTTP GET request. 
+ * @example
+ * store.dispatch(fetchDepartments())
+ */
 export const fetchDepartments = () => {
   return function(dispatch) {
     dispatch({type: "FETCH_DEPARTMENTS"});
@@ -14,7 +18,12 @@ export const fetchDepartments = () => {
   }
 }
 
-// Delete a department.
+/**
+ * Delete a department. Calls HTTP DELETE request. 
+ * @param {string} id - Department Id
+ * @example
+ * store.dispatch(deleteDepartment({name:'Sales'}))
+ */
 export const deleteDepartment = (id) => {
   return function(dispatch) {
     dispatch({type: "DELETE_DEPARTMENT"});
@@ -29,14 +38,20 @@ export const deleteDepartment = (id) => {
   }
 }
 
-// Create a department.
+/**
+ * Create a department. Calls HTTP POST request. 
+ * @param {object} departmentData
+ * @example
+ * store.dispatch(createDepartment({name:'Sales'}))
+ * store.dispatch(createDepartment({name:'Sales'})).then(()=>{console.log('Save!')})
+ */
 export const createDepartment = (departmentData={}) => {
   return function(dispatch) {
     const {
       name = '',
     } = departmentData;
     dispatch({type: "CREATE_DEPARTMENT"});
-    axios.post("/api/departments", departmentData)
+    return axios.post("/api/departments", departmentData)
       .then((response) => {
         dispatch({type: "CREATE_DEPARTMENT_FULFILLED", payload: response.data})
       })
@@ -47,7 +62,7 @@ export const createDepartment = (departmentData={}) => {
 }
 
 /**
- * Edit a department. Calls RESTful API PUT request. 
+ * Edit a department. Calls HTTP PUT request. 
  * @param {string} id - departmente Id
  * @param {object} updates - update data {name: 'IT'}
  * @example
@@ -55,7 +70,7 @@ export const createDepartment = (departmentData={}) => {
  * store.dispatch(editDepartment(10, {name:'Sales'})).then(()=>{console.log('Edit success!')})
  */
 export const editDepartment = (id, updates) => {
-  return (dispatch) => {
+  return function(dispatch){
     dispatch({type: "EDIT_EMPLOYEE"});
     return axios.put(`/api/departments/${id}`, updates)
       .then((response) => {
