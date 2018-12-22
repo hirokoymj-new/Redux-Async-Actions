@@ -1,5 +1,5 @@
 # Redux Async Actions - CREATE
-- Async actions allows us to keep the RESTful API calls separated from React component. 
+- Async actions allows us to separate the RESTful API call from React component. 
   
 ## Liv Demo
 https://async-actions.herokuapp.com/
