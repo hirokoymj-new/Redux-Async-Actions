@@ -27,10 +27,15 @@ export const fetchDepartments = () => {
 export const deleteDepartment = (id) => {
   return function(dispatch) {
     dispatch({type: "DELETE_DEPARTMENT"});
-    console.log(`/api/departments/${id}`);
     axios.delete(`/api/departments/${id}`)
       .then((response) => {
-        dispatch({type: "DELETE_DEPARTMENT_FULFILLED", payload: response.data})
+        dispatch({
+          type: "DELETE_DEPARTMENT_FULFILLED",
+          payload: {
+            id: id,
+            deletedData: response.data
+          }
+        })
       })
       .catch((err) => {
         dispatch({type: "DELETE_DEPARTMENT_REJECTED", payload: err})
@@ -74,7 +79,12 @@ export const editDepartment = (id, updates) => {
     dispatch({type: "EDIT_EMPLOYEE"});
     return axios.put(`/api/departments/${id}`, updates)
       .then((response) => {
-        dispatch({type: "EDIT_EMPLOYEE_FULFILLED", payload: response.data})
+        dispatch({
+          type: "EDIT_EMPLOYEE_FULFILLED",
+          payload: {
+            id: id,
+            updatedData: response.data
+          }})
       })
       .catch((err) => {
         dispatch({type: "EDIT_EMPLOYEE_REJECTED", payload: err})

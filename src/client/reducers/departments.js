@@ -26,9 +26,7 @@ const departmentsReducer = (state=departmentsDefaultState, action) => {
       return {...state, isFetching: false, error: action.payload}
     }
     case "DELETE_DEPARTMENT_FULFILLED": {
-      console.log('DELETE_DEPARTMENT_FULFILLED');
-      const updateDepartments = state.departments.filter(({ _id }) => _id !== action.payload._id);
-      console.log(updateDepartments);
+      const updateDepartments = state.departments.filter(({ _id }) => _id !== action.payload.id);
       return {
         ...state,
         isFetching: false,
@@ -42,8 +40,6 @@ const departmentsReducer = (state=departmentsDefaultState, action) => {
       return {...state, isFetching: false, error: action.payload}
     }
     case "CREATE_DEPARTMENT_FULFILLED": {
-      console.log('CREATE_DEPARTMENT_FULFILLED');
-      console.log(action.payload); //check if new department received correctly!!
       return {
         ...state,
         isFetching: false,
@@ -57,17 +53,18 @@ const departmentsReducer = (state=departmentsDefaultState, action) => {
       return {...state, isFetching: false, error: action.payload}
     }
     case "EDIT_DEPARTMENT_FULFILLED": {
-      const updatedDepartments = state.departments.map((department)=>{
-        if(department.id === action.updates.id){
+      console.log('EDIT_DEPARTMENT_FULFILLED');
+      const updatedDepartments = state.departments.map(({_id})=>{
+        console.log("_id", _id)
+        if(_id === action.payload.id){
           return {
             ...department,
-            ...action.updates
+            ...action.payload.updatedData
           };
         }else{
           return department;
         }
       })
-//      console.log(updatedDepartments);
       return {
         ...state,
         // Override rest of properties to update.
